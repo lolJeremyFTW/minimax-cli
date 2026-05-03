@@ -1,0 +1,30 @@
+{
+  "name": "minimax-cli",
+  "version": "1.0.0",
+  "description": "Use Claude Code CLI with MiniMax M2.7 API",
+  "main": "src/wrapper.js",
+  "bin": {
+    "minimax-cli": "./src/wrapper.js"
+  },
+  "preferGlobal": true,
+  "os": ["win32", "darwin", "linux"],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^8.2.0"
+  },
+  "keywords": [
+    "claude",
+    "minimax",
+    "cli",
+    "ai"
+  ],
+  "author": "Jeremy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lolJeremyFTW/minimax-cli"
+  }
+}
