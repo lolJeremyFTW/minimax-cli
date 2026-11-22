@@ -56,9 +56,16 @@ async function checkMiniMax(key, model) {
   return { ok: false, probleem: `MiniMax nam de sleutel niet aan (${last})` };
 }
 
+/** Vraagt iets zonder het op het scherm te zetten (voor de sleutel): wat je typt of plakt, verschijnt als sterretjes. */
 function vraag(tekst) {
-  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-  return new Promise(resolve => rl.question(tekst, antwoord => { rl.close(); resolve(antwoord.trim()); }));
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: true });
+  const schrijf = rl._writeToOutput.bind(rl);
+  let verborgen = false;
+  rl._writeToOutput = s => { if (!verborgen) return schrijf(s); if (s === '\r\n' || s === '\n') return schrijf(s); schrijf('*'.repeat(s.replace(/[\r\n]/g, '').length)); };
+  return new Promise(resolve => {
+    rl.question(tekst, antwoord => { rl.close(); resolve(antwoord.trim()); });
+    verborgen = true;
+  });
 }
 
 async function setup(model) {
